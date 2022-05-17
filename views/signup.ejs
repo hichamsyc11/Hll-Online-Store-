@@ -1,0 +1,52 @@
+<%-  include('parts/header') %> 
+<%-  include('parts/navbar') %> 
+
+
+<div class="container auth py-4">
+    <h3 class="mx-2">Create Account </h3>
+    <form action="/signup" method="POST">
+        
+        <input type="text" class="form-control" name="username" placeholder="Username">
+        <% let usernameErr = validationErrors.find(err=> err.param ==='username') %>
+       <% if(usernameErr) { %>
+        <p class="alert alert-danger">
+            <%= usernameErr.msg %>
+        </p>
+       <% } %>
+
+        <input type="email" class="form-control" name="email" placeholder="email">
+        <% let emailErr = validationErrors.find(err=> err.param ==='email') %>
+        <% if (emailErr) { %>
+         <p class="alert alert-danger">
+             <%= emailErr.msg %>
+         </p>
+        <% } %>
+
+        <input type="password" class="form-control" name="password" placeholder="password">
+        <% let passwordErr = validationErrors.find(err=> err.param ==='password') %>
+        <% if (passwordErr) { %>
+         <p class="alert alert-danger">
+             <%= passwordErr.msg %>
+         </p>
+        <% } %>
+
+        <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password">
+        <input type="submit" value="Create Account" class="btn btn-danger my-2 mx-2">
+    </form>   
+    
+    <br>
+    <div>
+        already have Account ? <a href="/login"> login </a>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

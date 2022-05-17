@@ -1,0 +1,72 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+
+
+
+<div class="container">
+    <% console.log(items) %>
+
+    <% if(items.length === 0) { %>
+        <p class="alert alert-danger">There is no items</p>
+    <% } else { %>
+    
+        <table class='table table-dark '>
+            <thead >
+                <td>no</td>
+                <td>Product name</td>
+                <td>Price</td>
+                <td>Amount</td>
+                <td>Total</td>
+                <td>
+                    <form method="post" >
+                        <input type="submit" class="btn btn-danger" value="Cancel All" formaction="/cart/deleteAll ">
+                    </form>
+                </td>
+            </thead>
+            <tbody>
+                <% for (let i = 0; i < items.length; i++) { %>
+                    <tr>
+                        <td> <%= i+1 %> </td>
+                        <td> <%= items[i].name %> </td>
+                        <td> <%= items[i].price %> $ </td>
+                        <form method="POST">
+                            <td> <input type="number" name="amount" class="form-control" value="<%= items[i].amount %>"> </td>
+                            <td> <%= items[i].price * items[i].amount %> $ </td>
+                            <td>
+                                <input type="hidden" name="cartId" value="<%= items[i]._id %>">
+                                <input type="submit" class="btn btn-success" value="Save" formaction="/cart/save">
+                                <a class="btn btn-primary" href="/verify-order?order=<%= items[i]._id %>"> Order </a>
+                                <input type="submit" class="btn btn-danger" value="Delete" formaction="/cart/delete">
+                            </td>
+                        </form>
+                        
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <% if(saveMsg){ %>
+            <p class="alert alert-success text-center">
+           
+              save successfully
+             
+            </p>
+
+            <% } %>
+        <% if(validationErrors) { %>
+            <p class="alert alert-danger text-center">
+                <%= validationErrors.msg%>
+            </p>
+        <% } %>
+        
+    <% } %>
+
+</div>
+
+
+
+
+
+
+
+
+

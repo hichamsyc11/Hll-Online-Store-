@@ -1,0 +1,22 @@
+<%- include('parts/header')%>
+<%- include('parts/navbar')%>
+
+<div class="container auth py-4">
+    <h3 class="py-3">Confirm your Order </h3>
+    <% if(validationError) { %>
+    <p class="alert alert-danger ">
+    <%= validationError.msg %>
+    </p>
+    <% } %>
+    <form action="/order" method="POST" >
+        <input type="hidden" name="cartId" value="<%= cart._id%>">
+        <input type="hidden" name="name" value="<%= cart.name%>">
+        <input type="hidden" name="price" value="<%= cart.price%>">
+        <input type="hidden" name="amount" value="<%= cart.amount%>">
+        <input type="hidden" name="productId" value="<%= cart.productId%>">
+        <input type="hidden" name="userId" value="<%= cart.userId%>">
+        <input type="text" name="address" placeholder="Enter your Address to continue" class="amount-order form-control">
+        <input type="submit" value="Continue" class="btn btn-danger my-3">
+    </form>
+</div>
+

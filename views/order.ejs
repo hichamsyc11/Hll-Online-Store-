@@ -1,0 +1,47 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+
+<div class="container">
+
+    <% if(items.length === 0) { %>
+        <p class="alert alert-danger">There is no items</p>
+    <% } else { %>
+    
+        <table class="table table-striped table-dark">
+            <thead>
+                <td>no</td>
+                <td>Product name</td>
+                <td>Price</td>
+                <td>Amount</td>
+                <td>Total</td>
+                <td>Address</td>
+                <td>Time</td>
+                <td>Status</td>
+                <td></td>
+            </thead>
+            <tbody>
+                <% for (let i = 0; i < items.length; i++) { %>
+                    <tr>
+                        <td> <%= i+1 %> </td>
+                        <td> <a class="text-white font-weight-bold" href="/product/<%= items[i].productId %>"><%= items[i].name %></a> </td>
+                        <td> <%= items[i].price %> $ </td>
+                        <form method="POST">
+                            <td> <%= items[i].amount %> </td>
+                            <td> <%= items[i].price * items[i].amount %> $ </td>
+                            <td> <%= items[i].address %> </td>
+                            <td> <%= items[i].timesTamp.toLocaleString(); %> </td>
+                            <td> <%= items[i].status %> </td>
+                          
+                            <td>
+                                <input type="hidden" name="orderId" value="<%= items[i]._id %>">
+                                <input type="submit" class="btn btn-danger" value="Cancel" formaction="/order/cancel">
+                            </td>
+                        </form>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } %>
+
+</div>
+

@@ -1,0 +1,40 @@
+<%- include('parts/header')%>
+<%- include('parts/navbar')%>
+
+
+<div class="container auth py-4">
+    <h3 class="mx-2">Login</h3>
+    <form action="/login" method="POST">
+
+        <input type="email" class="form-control" name="email" placeholder="email">
+        <% let emailErr = validationErrors.find(err=> err.param ==='email') %>
+        <% if (emailErr) { %>
+         <p class="alert alert-danger">
+             <%= emailErr.msg %>
+         </p>
+        <% } %>
+
+        <input type="password" class="form-control" name="password" placeholder="password">
+        <% let passwordErr = validationErrors.find(err=> err.param ==='password') %>
+        <% if (passwordErr) { %>
+         <p class="alert alert-danger">
+             <%= passwordErr.msg %>
+         </p>
+        <% } %>
+
+        <input type="submit" value="Login" class="btn btn-danger my-2 mx-2">
+    </form>
+    <br>
+        <% if(authErr) { %> 
+
+            <p class="alert alert-danger ">
+                <%= authErr %>
+            </p>
+
+        <% } %>
+
+    
+    <div class="mx-2"> 
+        Don't have account ? <a href="/login"> Create Account</a>
+    </div>
+</div>    

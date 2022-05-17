@@ -1,0 +1,58 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+
+<div class="container detail py-5">
+ <% if(!product){ %>
+
+    <div class="alert alert-dangers"> 
+      Sorry there is no products here
+    </div>
+
+    <% } else { %>
+        <div class="row py-5">
+            <div class="col col-12 col-md-6 ">
+                <div class="card" >
+                    <div class="product-detail-tumb"> 
+                    <img src="/<%= product.image%>" class="">
+                    </div>
+                    <div class="card-body">
+                        <form action="/cart" method="POST" class="add-to-cart-form d-flex py-2">
+                            <input type="number" name="amount" value="1" class="form-control ">
+                            <input type="hidden" name="name"  value="<%= product.name %> ">
+                            <input type="hidden" name="price" value="<%= product.price %> ">
+                            <input type="hidden" name="productId" value="<%= product._id %> ">
+                            <input type="hidden" name="redirectTo" value="/">
+                            <button type="submit" class=" btn btn-danger "><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-12 col-md-6 product-detail px-5">
+                <h3 class="title"><%= product.name%></h3>
+                <h5 class="price">Price: <%= product.price%> $</h5>
+                <p class="product-des"><%= product.description%></p>
+            </div>
+        </div>
+        
+     
+     <% } %>   
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include('parts/footer') %>

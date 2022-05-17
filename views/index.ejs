@@ -1,0 +1,130 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+
+<!-- start Header part -->
+<header class="header">
+    <div class="container">
+        <div class="row"> 
+         <div class="col-md-6">
+             <p class="promo-title">Welcome to our Shop</p>
+             <P class="p">Lorem ipsum dolor sit amet consectetur adipisicing elit Sed quas iste,
+                at quibusdam unde explicabo amet consectetur adipisicing .
+             </P>
+             <button class="btn btn-danger"><a href="/" >Shop Now</a></button>
+         </div>
+         <div class="col-md-6 text-center">
+             <img src="../undraw_add_to_cart.png" class="img-fluid">
+         </div>
+        
+        </div>
+        
+        </div>
+        
+</header>
+
+<!-- end header part -->
+<!-- start Products part  -->
+
+<section class="card-style">
+<div class="container">
+
+    <form class="filter p-2" action="/" method="GET">
+        <div class="row">
+            <div class="col col-md-10 d-flex">
+                <select name="category" class="form-control">
+                    <option value="all">All</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="phones">Phones</option>
+                    <option value="computers">Computers</option>
+                </select>
+                <input type="submit" class="btn btn-danger" value="Filter">
+            </div>
+            <div class="col col-md-2">
+               
+            </div>
+        </div>
+    </form>
+   
+    <% if(validationErrors) { %>
+        <p class="alert alert-danger">
+            <%= validationErrors.msg%>
+        </p>
+    <% } %>
+
+
+    <% if(products.length ===0){ %>
+        <div class="alert alert-danger">
+            Sorry there is no Products
+        </div>
+
+
+    <% }else{ %> 
+        <div class="row ">
+            <% for(let product of products){ %>
+    
+                <!-------cart part-------->
+                <div class="col col-12 col-md-6 col-lg-4 col-xl-4">
+                        <div class="product-card">
+                            <div class="badge">Hot</div>
+                            <div class="product-tumb">
+                                <img src="<%= product.image %>" alt="product">
+                            </div>
+                            
+                            <div class="product-details">
+                                <span class="product-catagory">category : <%= product.category%></span>
+                                <h4><a href="/product/<%= product._id%>"><%= product.name%> </a> </h4>
+                                <div class="price text-success"><h5 class="mt-4 ">$<%= product.price  %> </h5></div>
+                                <form action="/cart" method="POST" class="d-flex">
+                                    <input type="number" name="amount" value="1" class="form-control">
+                                    <input type="hidden" name="name"  value="<%= product.name %> ">
+                                    <input type="hidden" name="price" value="<%= product.price %> ">
+                                    <input type="hidden" name="productId" value="<%= product._id %> ">
+                                    <input type="hidden" name="redirectTo" value="/">
+                                  <!---  <input type="submit" value="Add to Cart" class="bot btn btn-primary"> -->
+                                 <button type="submit" class="bot btn btn-danger "><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                                </form>
+                            </div>
+                         
+                        </div>
+
+
+                        <!---
+                        <img src="<%= product.image %>" class="pict img-fluid img-thumbnail p-5">
+                        <div class="card-body">
+                          <h5 class="card-title">
+                          <a href="/product/<%= product._id%>"><%= product.name%></a>
+                          </h5>
+                          <h5 class="card-subtitle mb-2 text-muted ">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores .
+                         </h5>
+                          <div class="card-img-overlay d-flex justify-content-end">
+                            <a href="#" class="card-link text-danger like"><i class="fas fa-heart"></i> </a>
+                          </div>
+                             <form action="/cart" method="POST" >
+                                <div class="price text-success"><h5 class="mt-4 "> $<%= product.price  %> </h5></div>
+                                <input type="number" name="amount" class="form-control">
+                                <input type="hidden" name="name"  value="<%= product.name %> ">
+                                <input type="hidden" name="price" value="<%= product.price %> ">
+                                <input type="hidden" name="productId" value="<%= product._id %> ">
+                                <input type="hidden" name="redirectTo" value="/">
+                              <---  <input type="submit" value="Add to Cart" class="bot btn btn-primary"> -
+                             
+                                <button type="submit" class="btn btn-danger mt-4"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            </form>
+                        </div>
+                    -->
+                      
+    
+                </div>
+    
+    
+         <%  } %>
+        </div>
+
+       <% } %> 
+</div>
+
+</section>
+<!-- end Products part  -->
+
+<%- include('parts/footer') %>

@@ -1,0 +1,61 @@
+
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-danger">
+        <div class="container">
+            <a class="navbar-brand" href="#">Hicham Hll</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item <%= pageTitle === 'Home' ? 'active' : '' %>">
+                  <a class="nav-link" href="/">Home </a>
+                </li>
+
+                 <% if (isUser){ %> 
+                  
+                  <li class="nav-item <%= pageTitle === 'Cart' ? 'active' : '' %>">
+                    <a class="nav-link" href="/cart">Cart</a>
+                  </li>
+                  <li class="nav-item <%= pageTitle === 'Orders' ? 'active' : '' %>">
+                    <a class="nav-link " href="/order"> Orders </a>
+                  </li>
+
+                  <% } else { %>
+
+                <li class="nav-item <%= pageTitle === 'Login' ? 'active' : '' %>">
+                  <a class="nav-link " href="/login">Login</a>
+                </li>
+                <li class="nav-item <%= pageTitle === 'Sign up' ? 'active' : '' %>">
+                    <a class="nav-link " href="/signup">Sign up</a>
+                </li>
+
+                <% } %>
+
+                <% if(isAdmin) {%>
+                <li class="nav-item <%= pageTitle === 'Add Product' ? 'active' : '' %>">
+                    <a class="nav-link " href="/admin/add">Add Product</a>
+                </li>
+                <li class="nav-item <%= pageTitle === 'Manage orders' ? 'active' : '' %>">
+                    <a class="nav-link " href="/admin/order">Manage Orders</a>
+                </li>
+              </ul>
+              <% } %>
+              
+              <% if (isUser){ %> 
+
+             <form action="/logout" method="post" class="navbar-form mx-4">
+              <input type="submit" value="Logout" class="btn btn-danger " >
+             </form>
+             
+             <% } %>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+
